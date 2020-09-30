@@ -130,7 +130,7 @@ let addDepartments = () => {
 
 // Adding Role questions to node
 // Using data from mySQL
-let addRoles = () => {
+let addRoles = (manager_id) => {
     let department = [];
     connection.query("SELECT * FROM department", function (err, res) {
         if (err) {
@@ -186,7 +186,7 @@ let addRoles = () => {
 // Using data from mySQL
 let addEmployees = () => {
     let role = [];
-    connection.query("INSERT VALUES * FROM role", function (err, res) {   // Look this up
+    connection.query("SELECT * FROM role", function (err, res) {
         if (err) {
             throw err;
         }
@@ -239,4 +239,86 @@ let addEmployees = () => {
         });
 }
 
-// Still need more information for 100% done
+let viewDepartments = () => {
+    const queryString = "SELECT * FROM department";
+    return connection.query(queryString, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        console.table(res);
+        startingPoint();
+    });
+}
+
+let viewRoles = () => {
+    const queryString = "SELECT * FROM role";
+    connection.query(queryString, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        console.table(res);
+        startingPoint();
+    });
+}
+
+let viewEmployees = () => {
+    const queryString = "SELECT * FROM employee";
+    connection.query(queryString, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        console.table(res);
+        startingPoint();
+    });
+}
+
+let updateEmployeeRoles = () => {
+
+    const employees = viewEmployees();
+    const roles = viewRoles();
+    const managerid = viewDepartments();
+
+
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "employeeName",
+            message: "Which employee would you like to role update?",
+            choices: employees,
+        },
+        {
+            type: "list",
+            name: "department_id",
+            message: "What is the employee's new role?",
+            choices: roles,
+        },
+        {
+            type: "list",
+            name: "manager_id",
+            message: "What is the employee's manager id?",
+            choices: managerid,
+        }
+    ]).then(function (response) {
+        connection.query(`UPDATE employee SET role=‘${response.role}’ WHERE id=‘${response.manager_id}’`, function (err, res) {
+            if (err) {
+                throw err;
+            }
+            for (let i = 0; i < res.length; i++) {
+                role.push({ name: res[i].title, value: res[i].id });
+            }
+        });
+        connection.query("SELECT first_name, last_name, role_id FROM employee", function (err, res) {
+            if (err) {
+                throw err;
+            }
+            let employee = res.map((employee) => ({
+                name: employee.first_name + " " + employee.last_name,
+                value: employee.id,
+
+
+            }));
+        })
+    });
+}
+
+
