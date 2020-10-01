@@ -10,7 +10,7 @@ Developers are often tasked with creating interfaces that make it easy for non-d
 * run node index.js to begin 
 
 ### Database Schema🔬💾
-![Database Schema](db-schema.PNG)
+![Database Schema](db-schema.png)
 
 # What To Do 👁‍🗨👁‍🗨
 Build a command-line application that at a minimum allows the user to:
