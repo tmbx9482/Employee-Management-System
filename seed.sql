@@ -2,7 +2,7 @@ SEED
 --* All details 
 --* Inserting roles, salary, id's and data that will populate for tables
 --* Inerting tables with fuctions
-INSERT INTO department
+INSERT INTO departments
     (name)
 VALUES
     ("Marketing"),
@@ -12,7 +12,7 @@ VALUES
     ("Data Science");
 
 INSERT INTO role
-    (title, salary, department_id)
+    (title, salary, departments_id)
 
 VALUES
     ("Human Resource", 65.000, 3),

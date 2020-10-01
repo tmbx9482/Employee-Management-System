@@ -1,11 +1,11 @@
 -- * Letting the user know to drop database if not created **
-DROP DATABASE IF EXISTS employeetracker_db;
+DROP DATABASE IF EXISTS employeetrackerdb;
 
 -- Create the database task_saver_db and specified it for use.
-CREATE DATABASE `employeetracker_db`;
+CREATE DATABASE `employeetrackerdb`;
 
 -- Use this table to start project.
-USE `employeetracker_db`;
+USE `employeetrackerdb`;
 
 -- Create the table needed.
 -- Used PRIMARY KEY and FOREIGN KEY to make all three inner join

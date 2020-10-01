@@ -33,7 +33,7 @@ var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'password',
-    database: 'employeetracker_db'
+    database: 'employeetrackerdb'
 });
 
 //Connection found
@@ -115,7 +115,7 @@ let addDepartments = () => {
             },
         ])
         .then(function (response) {
-            const queryString = "INSERT INTO department SET ?";
+            const queryString = "INSERT INTO departments SET ?";
             connection.query(queryString, { dept_name: response.addDept }, function (
                 err
             ) {
@@ -131,13 +131,13 @@ let addDepartments = () => {
 // Adding Role questions to node
 // Using data from mySQL
 let addRoles = (manager_id) => {
-    let department = [];
-    connection.query("SELECT * FROM department", function (err, res) {
+    let departments = [];
+    connection.query("SELECT * FROM departments", function (err, res) {
         if (err) {
             throw err;
         }
         for (let i = 0; i < res.length; i++) {
-            department.push({ name: res[i].dept_name, value: res[i].id });
+            departments.push({ name: res[i].dept_name, value: res[i].id });
         }
     });
     inquirer
@@ -157,7 +157,7 @@ let addRoles = (manager_id) => {
             {
                 type: "list",
                 name: "careerPath",
-                message: "Which department does this role best fit?",
+                message: "Which departments does this role best fit?",
                 choices: ["Marketing", "Engineering", "Human Resource", "IT", "Data Science"]
             },
         ])
@@ -169,7 +169,7 @@ let addRoles = (manager_id) => {
                 {
                     title: response.roleTitle,
                     salary: response.moneyMaker,
-                    department_id: response.careerPath,
+                    departments_id: response.careerPath,
                 },
                 function (err) {
                     if (err) {
@@ -232,7 +232,7 @@ let addEmployees = () => {
                     if (err) {
                         throw err;
                     }
-                    console.log("Employee has been added to a Department");
+                    console.log("Employee has been added to a departments");
                     startingPoint();
                 }
             );
@@ -240,7 +240,7 @@ let addEmployees = () => {
 }
 
 let viewDepartments = () => {
-    const queryString = "SELECT * FROM department";
+    const queryString = "SELECT * FROM departments";
     return connection.query(queryString, function (err, res) {
         if (err) {
             throw err;
@@ -288,7 +288,7 @@ let updateEmployeeRoles = () => {
         },
         {
             type: "list",
-            name: "department_id",
+            name: "departments_id",
             message: "What is the employee's new role?",
             choices: roles,
         },
