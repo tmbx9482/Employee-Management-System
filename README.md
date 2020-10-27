@@ -34,7 +34,7 @@ Bonus points if you're able to:
 
   * View the total utilized budget of a department -- ie the combined salaries of all employees in that department
   ------------------------------------------------------------------------------------------------------------------
-## Video Link
+## Video Link 📽
 https://drive.google.com/file/d/15vtROeTAVzjcNqJLgdtuAuYlUf3DcO8g/view
 
 ## USER STORY 📖
